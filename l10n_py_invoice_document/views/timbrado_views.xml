@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_timbrado_form" model="ir.ui.view">
+        <field name="name">INVOICE DOCUMENT timbrado</field>
+        <field name="model">timbrado.data</field>
+        <field name="arch" type="xml">
+            <form string="Document Type">
+                <field name="state" invisible="1"/>
+                <header>
+                    <button name="button_activate" type="object"
+                            string="Activar el timbrado"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group col="1">
+                    <group>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="validity_start"/>
+                            <field name="validity_end"/>
+                            <field name="trade_code"/>
+                            <field name="shipping_point"/>
+                        </group>
+                        <group>
+                            <field name="start_number"/>
+                            <field name="end_number"/>
+                            <field name="qty"/>
+                            <field name="document_type_id"/>
+                            <field name="print_system"/>
+                        </group>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_timbrado_type_tree1" model="ir.ui.view">
+        <field name="name">L10N_PY_INVOICE_DOCUMENT timbrado</field>
+        <field name="model">timbrado.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="validity_start"/>
+                <field name="validity_end"/>
+                <field name="trade_code"/>
+                <field name="shipping_point"/>
+                <field name="qty"/>
+                <field name="range"/>
+                <field name="document_type_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_timbrado" model="ir.actions.act_window">
+        <field name="name">Gestion de Timbrados</field>
+        <field name="res_model">timbrado.data</field>
+        <field name="domain">[]</field>
+        <field name="context">{"search_default_active":1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un nuevo documento de Timbrado
+            </p>
+            <p>
+                Un documento de timbrado permite emitir un conjunto de facturas
+                segun la normativa vigente en Paraguay.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_action_timbrado"
+            action="action_timbrado"
+            parent="account.account_account_menu"
+            sequence="19"/>
+
+</odoo>

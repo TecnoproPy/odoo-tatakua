@@ -1,0 +1,18 @@
+id,sequence,code,name,report_name,cod_doc_set,req_timbrado,compra,venta,country_id/id,active,internal_type,doc_code_prefix
+dc_fac,10,FAC,FACTURA,FACTURA,1,True,True,True,base.py,True,invoice,FA
+dc_nd,20,ND,NOTA DE DEBITO,NOTA DE DEBITO,2,True,True,True,base.py,True,debit_note,ND
+dc_nc,30,NC,NOTA DE CREDITO,NOTA DE CREDITO,3,True,True,True,base.py,True,credit_note,NC
+dc_desp,40,DESP,DESPACHO (Fact Aduanero),DESPACHO (Fact Aduanero),4,False,True,False,base.py,True,,DE
+dc_af,50,AF,AUTOFACTURA (Fact Proveed),AUTOFACTURA (Fact Proveed),5,True,True,False,base.py,True,,AF
+dc_pa,60,PA,PASAJE AEREO,PASAJE AEREO,7,False,False,True,base.py,False,invoice,PA
+dc_pae,70,PAE,PASAJE AEREO ELECTRÓNICO,PASAJE AEREO ELECTRÓNICO,13,False,False,True,base.py,False,invoice,PA
+dc_inv,80,INV,FACTURA DEL EXTERIOR,FACTURA DEL EXTERIOR,8,False,True,False,base.py,True,invoice,IN
+dc_pls,90,PLS,PLANILLA DE SUELDOS,PLANILLA DE SUELDOS,9,False,True,False,base.py,False,,PS
+dc_cing,100,CING,COMPROBANTE DE INGRESOS,COMPROBANTE DE INGRESOS,10,False,True,False,base.py,False,,IN
+dc_fexp,110,FEXP,FACTURA EXPORTACIÓN (Fact Cliente),FACTURA EXPORTACIÓN (Fact Cliente),0,False,False,False,base.py,True,invoice,EX
+dc_rsa,120,RSA,RETENCIÓN ABSORBIDA,RETENCIÓN ABSORBIDA,11,True,True,True,base.py,True,,RA
+dc_vui,130,VUI,VENTA USO INTERNO,VENTA USO INTERNO,0,False,False,True,base.py,True,invoice,VI
+dc_cui,140,CUI,COMPRA USO INTERNO,COMPRA USO INTERNO,0,False,True,False,base.py,True,,CI
+dc_nci,150,NCI,NOTA DE CREDITO - USO INTERNO,NOTA DE CREDITO - USO INTERNO,0,False,True,False,base.py,True,,NC
+dc_rna,160,RNA,RETENCIÓN NO ABSORBIDA,RETENCIÓN NO ABSORBIDA,0,False,False,False,base.py,True,,RA
+dc_suel,170,SUEL,SUELDOS (Uso Interno),SUELDOS (Uso Interno),0,False,True,False,base.py,True,,SU

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- form view -->
+    <record id="view_document_type_form" model="ir.ui.view">
+        <field name="name">INVOICE DOCUMENT</field>
+        <field name="model">l10n_latam.document.type</field>
+        <field name="inherit_id" ref="l10n_latam_invoice_document.view_document_type_form"/>
+        <field name="arch" type="xml">
+            <field name="doc_code_prefix" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name='report_name' position="after">
+                <field name='cod_doc_set'/>
+                <field name='req_timbrado' widget="boolean_toggle"/>
+                <field name='compra' widget="boolean_toggle"/>
+                <field name='venta' widget="boolean_toggle"/>
+                <field name='active' widget="boolean_toggle"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- tree view -->
+    <record id="view_document_type_tree" model="ir.ui.view">
+        <field name="name">l10n_latam.document.type.tree</field>
+        <field name="model">l10n_latam.document.type</field>
+        <field name="inherit_id" ref="l10n_latam_invoice_document.view_document_type_tree"/>
+        <field name="arch" type="xml">
+            <field name="doc_code_prefix" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name='report_name' position="after">
+                <field name='cod_doc_set'/>
+                <field name='req_timbrado' widget="boolean_toggle"/>
+                <field name='compra' widget="boolean_toggle"/>
+                <field name='venta' widget="boolean_toggle"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_document_type_argentina">
+        <field name="name">Document Types</field>
+        <field name="res_model">l10n_latam.document.type</field>
+        <field name="context">{'search_default_localization': 1}</field>
+    </record>
+
+</odoo>

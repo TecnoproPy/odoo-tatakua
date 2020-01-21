@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Factura -->
+        <template id="py_invoice">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-esc="company.update_scss()"/>
+
+            <style type="text/css">
+                .font-10-px {
+                line-height:10px;
+                font-size: 10px;
+                <t t-if="o.timbrado_id.print_system=='pre_printed'">
+                    color: white
+                </t>
+                }
+                .font-7-px {
+                line-height:7px;
+                font-size: 7px;
+                <t t-if="o.timbrado_id.print_system=='pre_printed'">
+                    color: white
+                </t>
+                }
+                .font-11-px {
+                font-size: 11px;
+                <t t-if="o.timbrado_id.print_system=='pre_printed'">
+                    color: white
+                </t>
+                }
+                .font-125 {
+                font-size: 16;
+                <t t-if="o.timbrado_id.print_system=='pre_printed'">
+                    color: white
+                </t>
+                }
+                .font-normal {
+                <t t-if="o.timbrado_id.print_system=='pre_printed'">
+                    color: white
+                </t>
+                }
+                .visible {
+                    color: black
+                }
+                .separador-5 {
+                height:5px;
+                }
+                .separador-35 {
+                height:35px;
+                }
+                .cuerpo {
+                height:500px;
+                }
+                table {
+                width:100%;
+                }
+<!--
+                div {
+                border:1px solid black
+                }
+-->
+            </style>
+
+            <!-- Encabezado de la factura -->
+            <div class="row">
+                <table>
+                    <tr>
+                        <td style="width: 59.88%">
+                            <div class="font-normal">
+                                <p>TATAKUA</p>
+                                <p>logo y demas datos de la empresa</p>
+                                <span t-esc="company.name"/>
+                            </div>
+                        </td>
+                        <td style="width: 40.12%">
+                            <div align="center">
+                                <p>
+                                    <div class="font-10-px">
+                                        <b>Timbrado Nro <span t-esc="o.timbrado_id.name"/></b>
+                                        <br/>
+                                        Fecha inicio vigencia <span t-esc="o.timbrado_id.validity_start.strftime('%d/%m/%Y')"/>
+                                        <br/>
+                                        Fecha fin vigencia <span t-esc="o.timbrado_id.validity_end.strftime('%d/%m/%Y')"/>
+                                        <br/>
+                                    </div>
+
+                                    <span class="font-normal">RUC: <span t-esc="company.vat"/></span>
+                                    <br/>
+                                    <b class="font-125">FACTURA</b>
+                                    <br/>
+                                    <span class="font-normal">001-001-</span><span class="font-normal visible" t-esc="o.document_number"/>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- separador de 5 px -->
+            <div class="separador-5"/>
+
+            <!-- datos varios de la factura y cliente -->
+            <div class="font-11-px">
+                <div class="row">
+                    <div class="col-6">
+                        FECHA DE EMISION: <span class="visible" t-field="o.invoice_date"/>
+                    </div>
+                    <div class="col-6">
+                        COND. DE VENTA
+                        <span class="visible" t-field="o.payment_cash"/> CONTADO
+                        <span class="visible" t-field="o.payment_credit"/> CREDITO
+                        <span class="visible" t-field="o.payment_days"/> DIAS
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        NOMBRE O RAZON SOCIAL:
+                        <span class="visible" t-field="o.partner_id.name"/>
+                    </div>
+                    <div class="col-4">
+                        RUC:/C.I. Nro: <span class="visible" t-field="o.partner_id.ruc"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        DOMICILIO: <span class="visible" t-field="o.partner_id.street"/>
+                    </div>
+                    <div class="col-4">
+                        FORMA DE PAGO:
+                        <span class="visible" t-field="o.invoice_payment_term_id.name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        OBSERVACION: <span class="visible" t-field="o.narration"/>
+                    </div>
+                    <div class="col-4">
+                        NOTA DE REMISION Nro: <span class="visible" t-field="o.remision"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- separador de 5 px -->
+            <div class="separador-5"/>
+
+            <!-- Productos vendidos -->
+            <div class="row cuerpo">
+                <table class="font-11-px">
+                    <tr>
+                        <th rowspan="2" style="width:7.8%">
+                            <center>CANT.</center>
+                        </th>
+                        <th rowspan="2" style="width:47.265%">
+                            <center>DESCRIPCION</center>
+                        </th>
+                        <th rowspan="2" style="width:13.28%">
+                            <center>PRECIO<br/>UNITARIO</center>
+                        </th>
+                        <th colspan="2" style="width:32.03%">
+                            <center>VALOR DE VENTAS</center>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><center>Exentas</center></th>
+                        <th><center>IVA 10%</center></th>
+                    </tr>
+                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                        <tr>
+                            <td class="text-center visible">
+                                <span t-field="line.quantity"/>
+                                <span t-field="line.product_uom_id"
+                                      groups="uom.group_uom"/>
+                            </td>
+                            <td class="visible">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td class="visible" align="right">
+                                <span t-field="line.price_unit"/>
+                            </td>
+                            <td class="visible" align="right">
+                                <span t-field="line.tax_free"/>
+                            </td>
+                            <td class="visible" align="right">
+                                <span t-field="line.tax_10"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </div>
+
+            <!-- Subtotales -->
+            <div class="row">
+                <table class="font-11-px table-bordered">
+                    <tr>
+                        <td style="width:68.12%">
+                            SUB-TOTAL
+                        </td>
+                        <td class="visible" style="width:11,577%" align="right">
+                            <span t-field="o.amount_tax_free_py"/>
+                        </td>
+                        <td class="visible" style="width:20.3020%" align="right">
+                            <span t-field="o.amount_tax_10_py"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <table class="font-11-px table-bordered">
+                    <tr height="32px;">
+                        <td style="width:79.697%" >
+                            TOTAL A PAGAR: <span t-field="o.amount_total_in_words"/>
+                        </td>
+                        <td class="visible" style="width:20.3020%; text-align: right; vertical-align: middle;">
+                            <span t-field="o.amount_total_py"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- Liquidacion del iva -->
+            <div class="row">
+                <table class="font-11-px table-bordered">
+                    <tr>
+                        <td style="width:50%">
+                            LIQUIDACIóN DEL IVA (10%): <span class="visible" t-field="o.tax_10"/>
+                        </td>
+                        <td style="width:50%">
+                            TOTAL IVA: <span class="visible" t-field="o.tax_10"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- Pie de la factura -->
+            <div class="row font-11-px">
+                <table>
+                    <tr>
+                        <td style="width:42.1875%">
+                            <p>
+                                <div class="font-7-px">
+                                        <p>1) Exija Recibo Oficial de la Empresa.
+                                            La Factura no será válida como
+                                            recibo.
+                                        <br/>
+                                        2) Para todos los efectos legales se
+                                            someterán a la jurisdicción de los
+                                            Tribunales de la Capital en el
+                                            fuero Comercial.
+                                        <br/>
+                                        3) Cuando se produzcal el dcaimiento
+                                            de los plazos de pago expresados en
+                                            esta factura, se autiriza tanto a
+                                            la consulta como la inclusión en la
+                                            base de informaciones comerciales,
+                                            por el tal de los saldos de todos
+                                            los documentos aunque otros no
+                                            estuvieren vencidos, conforme se
+                                            establece en la Ley 1682.
+                                        </p>
+                                </div>
+                            </p>
+                        </td>
+                        <td style="width:57.8125%">
+                            <small>
+                                <center>Recibi Conforme</center>
+                                <br/>
+                                Firma: .......................................................................
+                                Aclaracion: ..................................................................
+                            </small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </template>
+
+        <!-- hacer dos facturas iguales en landscape en la hoja A4 -->
+        <template id="_invoice_frame">
+            <t t-call="web.internal_layout">
+                <table>
+                    <tr>
+                        <td style="width: 46.4%;">
+                            <t t-call="l10n_py_reports.py_invoice"/>
+                        </td>
+                        <td style="width: 7.2%"></td>
+                        <td style="width: 46.4%;">
+                            <t t-call="l10n_py_reports.py_invoice"/>
+                        </td>
+                    </tr>
+                </table>
+            </t>
+        </template>
+
+        <!-- punto de partida -->
+        <template id="report_invoice_with_payments">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                       t-value="o.invoice_user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="l10n_py_reports._invoice_frame"
+                       t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

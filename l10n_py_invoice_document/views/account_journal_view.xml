@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_journal_form" model="ir.ui.view">
+        <field name="model">account.journal</field>
+        <field name="name">INVOICE DOCUMENT</field>
+        <field name="inherit_id" ref="l10n_latam_invoice_document.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']/.." position="inside">
+                <field name="l10n_py_sequence_ids" nolabel="1" colspan="2"
+                       attrs="{'invisible': ['|', ('l10n_latam_use_documents', '=', False), ('l10n_latam_country_code', '!=', 'PY')]}">
+                    <tree create="false" delete="false" editable="top" default_order="id">
+                        <field name="name" readonly="True" string="Sequence"/>
+                        <field name="number_next_actual" string="Next Number"/>
+                        <field name="id" invisible="1"/>
+                    </tree>
+                </field>
+
+            </xpath>
+            <label for="sequence_number_next" position="attributes">
+                <attribute name="attrs">{'invisible': [('l10n_latam_use_documents', '=', True), ('l10n_latam_country_code', '=', 'PY')]}</attribute>
+            </label>
+            <field name="refund_sequence" position="attributes">
+                <attribute name="attrs">{'invisible': [('l10n_latam_use_documents', '=', True), ('l10n_latam_country_code', '=', 'PY')]}</attribute>
+            </field>
+            <xpath expr="//field[@name='sequence_number_next']/.." position="attributes">
+                <attribute name="attrs">{'invisible': [('l10n_latam_use_documents', '=', True), ('l10n_latam_country_code', '=', 'PY')]}</attribute>
+            </xpath>
+
+            <field name="l10n_latam_use_documents" position="after">
+                <field name="l10n_py_shipping_point"
+                       attrs="{'invisible':['|', '|', ('l10n_latam_country_code', '!=', 'PY'), ('l10n_latam_use_documents', '=', False), ('type', '!=', 'sale')], 'required':[('l10n_latam_country_code', '=', 'PY'), ('l10n_latam_use_documents', '=', True), ('type', '=', 'sale')]}"/>
+                <field name="l10n_py_trade_code"
+                       attrs="{'invisible':['|', '|', ('l10n_latam_country_code', '!=', 'PY'), ('l10n_latam_use_documents', '=', False), ('type', '!=', 'sale')], 'required':[('l10n_latam_country_code', '=', 'PY'), ('l10n_latam_use_documents', '=', True), ('type', '=', 'sale')]}"/>
+<!--
+                <field name="l10n_py_share_sequences"
+                       attrs="{'invisible':[('l10n_ar_afip_pos_system', '!=', 'II_IM')]}"/>
+-->
+            </field>
+
+        </field>
+    </record>
+
+</odoo>

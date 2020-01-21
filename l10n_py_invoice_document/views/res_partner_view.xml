@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- cambiar NIF -> RUC y agregar CI -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">INVOICE DOCUMENT Cedula</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="ruc"/>
+                <field name="ci"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

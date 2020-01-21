@@ -1,0 +1,2 @@
+- Se requiere cargar los timbrados correspondientes para los documentos a emitir en Contabilidad / Gestion de timbrados
+- En los diarios de compra y venta tildar "Usa Documentos"

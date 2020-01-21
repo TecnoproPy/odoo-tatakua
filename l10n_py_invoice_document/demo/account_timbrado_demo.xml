@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="timbrado_1" model="timbrado.data">
+            <field name="name">123456789</field>
+            <field name="validity_start">2019-05-01</field>
+            <field name="validity_end">2019-06-15</field>
+            <field name="trade_code">1</field>
+            <field name="shipping_point">1</field>
+            <field name="document_type_id" model="l10n_latam.document.type" search="[('code','=','FAC')]"/>
+            <field name="start_number">1</field>
+            <field name="end_number">100</field>
+            <field name="state">active</field>
+            <field name="print_system">auto_printer</field>
+        </record>
+        <record id="timbrado_2" model="timbrado.data">
+            <field name="name">123456789</field>
+            <field name="validity_start">2019-12-01</field>
+            <field name="validity_end">2019-12-15</field>
+            <field name="trade_code">1</field>
+            <field name="shipping_point">1</field>
+            <field name="document_type_id" model="l10n_latam.document.type" search="[('code','=','NC')]"/>
+            <field name="start_number">1</field>
+            <field name="end_number">100</field>
+            <field name="print_system">auto_printer</field>
+        </record>
+        <record id="timbrado_3" model="timbrado.data">
+            <field name="name">123456789</field>
+            <field name="validity_start">2020-01-01</field>
+            <field name="validity_end">2020-02-15</field>
+            <field name="trade_code">1</field>
+            <field name="shipping_point">1</field>
+            <field name="document_type_id" model="l10n_latam.document.type" search="[('code','=','ND')]"/>
+            <field name="start_number">1</field>
+            <field name="end_number">100</field>
+            <field name="print_system">auto_printer</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- agregar el timbrado del en la factura -->
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">INVOICE DOCUMENT timbrado</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="l10n_latam_document_number" position="attributes">
+                <attribute name="attrs">{
+                    'invisible': ['|',('l10n_latam_use_documents', '=', False),
+                                      ('type', 'in', ['out_invoice','out_refund'])]
+                    }</attribute>
+            </field>
+
+            <!-- Timbrado que aparece en la factura del cliente -->
+            <field name='ref' position="after">
+                <field name="l10n_py_trade_code" invisible="1"/>
+                <field name="l10n_py_shipping_point" invisible="1"/>
+                <field name="document_type_code" invisible="1"/>
+
+                <field name='timbrado_id'
+                       attrs="{
+                        'invisible': ['|',('l10n_latam_use_documents', '=', False),
+                                          ('type', 'not in', ['out_invoice','out_refund'])],
+                        'required': [('l10n_latam_use_documents', '=', True),
+                                     ('type', 'in', ['out_invoice','out_refund'])],
+                        'readonly': [('state', '!=', 'draft')]}"
+                       domain="[('state', 'in', ['active']),
+                                ('trade_code','=',l10n_py_trade_code),
+                                ('shipping_point','=',l10n_py_shipping_point),
+                                 ('code','=',document_type_code)
+                                ]"
+                       options="{'no_open': True, 'no_create': True}"
+                />
+            </field>
+            <!-- Timbrado y fecha de vencimiento que aparece en la factura del proveedor -->
+            <field name="invoice_vendor_bill_id" position="after">
+                <field name="l10n_py_timbrado"
+                       attrs="{
+                        'invisible': ['|',('l10n_latam_use_documents', '=', False),
+                                          ('type', 'not in', ['in_invoice','in_refund'])],
+                        'required': [('l10n_latam_use_documents', '=', True),
+                                     ('type', 'in', ['in_invoice','in_refund'])],
+                        'readonly': [('state', '!=', 'draft')]}"
+                />
+                <field name="l10n_py_validity_end"
+                       attrs="{
+                        'invisible': ['|',('l10n_latam_use_documents', '=', False),
+                                          ('type', 'not in', ['in_invoice','in_refund'])],
+                        'required': [('l10n_latam_use_documents', '=', True),
+                                     ('type', 'in', ['in_invoice','in_refund'])],
+                        'readonly': [('state', '!=', 'draft')]}"
+                />
+            </field>
+            <!-- Remito -->
+            <field name="l10n_latam_document_type_id" position="after">
+                <field name="remision"/>
+            </field>
+
+        </field>
+    </record>
+</odoo>

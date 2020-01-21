@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- carga la localizacion cuando el pais es paraguay -->
+    <data noupdate="1">
+        <function name="try_loading_for_current_company" model="account.chart.template" >
+            <value eval="[ref('l10n_py.py_chart_template')]"/>
+        </function>
+    </data>
+</odoo>
