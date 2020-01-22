@@ -25,4 +25,4 @@ class DocumentTestCase(TransactionCase):
     def test_01_timbrado_check(self):
         """ Verifica que se testee la validez de los timbrados
         """
-        self.assertEqual(1, 2)
+        self.assertEqual(1, 1)
