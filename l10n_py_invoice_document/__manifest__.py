@@ -1,6 +1,6 @@
 {
     'name': 'Tipos de documentos Paraguay',
-    'version': '13.0.0.0.1',
+    'version': '13.0.0.0.2',
     'category': 'Localizacion',
     'sequence': 14,
     'author': 'TecnoproPy',
@@ -27,7 +27,8 @@
         'views/res_partner_view.xml'
     ],
     'demo': [
-        'demo/account_timbrado_demo.xml'
+        'demo/account_timbrado_demo.xml',
+        'demo/base_res_partner.xml'
     ],
     'installable': True,
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="base.res_partner_12" model="res.partner">
+            <field name="ruc">80021359-9</field>
+        </record>
+</odoo>

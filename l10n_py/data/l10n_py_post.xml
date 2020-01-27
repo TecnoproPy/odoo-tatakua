@@ -165,6 +165,67 @@ https://www.odoo.com/documentation/13.0/webservices/localization.html
         ]"/>
     </record>
 
+    <record id="sale_tax_template_exempt" model="account.tax.template">
+        <!-- [Required] Set the CoA owning this tax. -->
+        <field name="chart_template_id" ref="py_chart_template"/>
+
+        <!-- [Required] Specify the name to display for this tax. -->
+        <field name="name">IVA Excento</field>
+
+        <!-- [Optional] Specify a short text to be displayed on invoices.
+        For example, a tax named "15% on Services" can have the following label
+        on invoice "15%". -->
+        <field name="description">IVA 0%</field>
+
+        <!-- [Optional] Boolean that indicates if the amount should be considered
+        as included in price. False by default.
+        E.g. Suppose v = 132 and a tax amount of 20.
+        If price_include = False, the computed amount will be 132 * 0.2 = 26.4.
+        If price_include = True, the computed amount will be 132 - (132 / 1.2) = 132 - 110 = 22. -->
+        <field name="price_include" eval="True"/>
+
+        <!-- [Required] Specify the amount.
+        E.g. 7 with fixed amount_type means v + 7 if v is the amount on which
+        the tax is applied.
+        If amount_type is 'percent', the tax amount is v * 0.07. -->
+        <field name="amount">0</field>
+
+        <!-- [Optional] Define the tax's type.
+        'sale', 'purchase' or 'none' are the allowed values. 'sale' is the
+        default value.
+        Note: 'none' means a tax can't be used by itself, however it can still
+        be used in a group. -->
+        <field name="type_tax_use">sale</field>
+
+        <!-- [Optional] The sequence field is used to define order in which the
+        tax lines are applied. By default, sequence = 1. -->
+        <field name="sequence" eval="3"/>
+
+        <field name="tax_group_id" ref="tax_group_iva_0"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('tax_received_5'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('tax_received_5'),
+            }),
+        ]"/>
+    </record>
+
 
     <record id="purchase_tax_template_10" model="account.tax.template">
         <!-- [Required] Set the CoA owning this tax. -->
@@ -200,7 +261,7 @@ https://www.odoo.com/documentation/13.0/webservices/localization.html
 
         <!-- [Optional] The sequence field is used to define order in which the
         tax lines are applied. By default, sequence = 1. -->
-        <field name="sequence" eval="3"/>
+        <field name="sequence" eval="4"/>
 
         <field name="tax_group_id" ref="tax_group_iva_10"/>
         <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
@@ -261,9 +322,70 @@ https://www.odoo.com/documentation/13.0/webservices/localization.html
 
         <!-- [Optional] The sequence field is used to define order in which the
         tax lines are applied. By default, sequence = 1. -->
-        <field name="sequence" eval="4"/>
+        <field name="sequence" eval="5"/>
 
         <field name="tax_group_id" ref="tax_group_iva_5"/>
+        <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('tax_paid_5'),
+            }),
+        ]"/>
+        <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'base',
+            }),
+            (0,0, {
+                'factor_percent': 100,
+                'repartition_type': 'tax',
+                'account_id': ref('tax_paid_5'),
+            }),
+        ]"/>
+    </record>
+
+    <record id="purchase_tax_template_exempt" model="account.tax.template">
+        <!-- [Required] Set the CoA owning this tax. -->
+        <field name="chart_template_id" ref="py_chart_template"/>
+
+        <!-- [Required] Specify the name to display for this tax. -->
+        <field name="name">IVA Excento</field>
+
+        <!-- [Optional] Specify a short text to be displayed on invoices.
+        For example, a tax named "15% on Services" can have the following label
+        on invoice "15%". -->
+        <field name="description">IVA 0%</field>
+
+        <!-- [Optional] Boolean that indicates if the amount should be considered
+        as included in price. False by default.
+        E.g. Suppose v = 132 and a tax amount of 20.
+        If price_include = False, the computed amount will be 132 * 0.2 = 26.4.
+        If price_include = True, the computed amount will be 132 - (132 / 1.2) = 132 - 110 = 22. -->
+        <field name="price_include" eval="True"/>
+
+        <!-- [Required] Specify the amount.
+        E.g. 7 with fixed amount_type means v + 7 if v is the amount on which
+        the tax is applied.
+        If amount_type is 'percent', the tax amount is v * 0.07. -->
+        <field name="amount">0</field>
+
+        <!-- [Optional] Define the tax's type.
+        'sale', 'purchase' or 'none' are the allowed values. 'sale' is the
+        default value.
+        Note: 'none' means a tax can't be used by itself, however it can still
+        be used in a group. -->
+        <field name="type_tax_use">purchase</field>
+
+        <!-- [Optional] The sequence field is used to define order in which the
+        tax lines are applied. By default, sequence = 1. -->
+        <field name="sequence" eval="6"/>
+
+        <field name="tax_group_id" ref="tax_group_iva_0"/>
         <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
             (0,0, {
                 'factor_percent': 100,

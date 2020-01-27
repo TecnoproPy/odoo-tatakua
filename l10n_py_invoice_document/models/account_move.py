@@ -102,16 +102,24 @@ class AccountJournal(models.Model):
             proximo = seq.number_next
             # chequear numero a validar es mayor que el maximo
             if proximo > self.timbrado_id.end_number:
-                raise ValidationError(_('El timbrado ya no es valido, el '
-                                        'numero de documento que quiere '
-                                        'validar esta mas alla del rango.'))
+                raise ValidationError(
+                    _('El timbrado ya no es valido, el numero de documento '
+                      'que quiere validar esta mas alla del rango.\n'
+                      'El proximo numero de factura es %s mientras que el '
+                      'rango de validez del timbrado es [%s - %s]') %
+                    (proximo, self.timbrado_id.start_number,
+                     self.timbrado_id.end_number))
 
             # chequear numero a validar es menor que el minimo
             if proximo < self.timbrado_id.start_number:
-                raise ValidationError(_('El timbrado no es valido. Intenta '
-                                        'validar un numero de documento que '
-                                        'es menor al minimo valido para este '
-                                        'timbrado.'))
+                raise ValidationError(
+                    _('El timbrado no es valido. Intenta validar un numero de '
+                      'documento que es menor al minimo valido para este '
+                      'timbrado.\n'
+                      'El proximo numero de factura es %s mientras que el '
+                      'rango de validez del timbrado es [%s - %s]') %
+                    (proximo, self.timbrado_id.start_number,
+                     self.timbrado_id.end_number))
 
             # numero a validar es igual al maximo, invalidar timbrado
             if proximo == self.timbrado_id.end_number:
