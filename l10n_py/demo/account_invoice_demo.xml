@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- ==== Invoice Demo 1 with attachment ==== -->
         <record id="demo_invoice_1" model="account.move">
             <field name="type">out_invoice</field>

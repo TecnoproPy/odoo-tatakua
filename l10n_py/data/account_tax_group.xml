@@ -7,4 +7,8 @@
     <record id="tax_group_iva_10" model="account.tax.group">
         <field name="name">IVA 10%</field>
     </record>
+
+    <record id="tax_group_iva_0" model="account.tax.group">
+        <field name="name">IVA Excento</field>
+    </record>
 </odoo>

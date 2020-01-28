@@ -34,6 +34,7 @@ Known issues / Roadmap
 - Traducir las cuentas al castellano
 - Revisar IVA
 - Testeo completo de la localizacion
+- Agregar libros de iva
 
 Changelog
 =========
