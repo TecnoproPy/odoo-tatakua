@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- form view -->
+    <record id="view_partner_type_form" model="ir.ui.view">
+        <field name="name">PARTNER TYPE</field>
+        <field name="model">partner.type</field>
+        <field name="arch" type="xml">
+            <form string="Partner Type">
+                <group>
+                    <field name="name"/>
+                    <field name="ruc_required_person" widget="boolean_toggle"/>
+                    <field name="ruc_required_company" widget="boolean_toggle"/>
+                    <field name="consolidated_ruc"/>
+                    <field name="default_account"/>
+                    <field name="applied_to"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view -->
+    <record id="view_partner_type_tree" model="ir.ui.view">
+        <field name="name">L10N PY INVOICE DOCUMENT partner_type</field>
+        <field name="model">partner.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="ruc_required_person" widget="boolean_toggle"/>
+                <field name="ruc_required_company" widget="boolean_toggle"/>
+                <field name="consolidated_ruc"/>
+                <field name="default_account"/>
+                <field name="applied_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_partner_type" model="ir.actions.act_window">
+        <field name="name">Tipos de Socios de Negocio</field>
+        <field name="res_model">partner.type</field>
+        <field name="domain">[]</field>
+        <field name="context">{"search_default_active":1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un nuevo tiopo de Socio de Negocio
+            </p>
+            <p>
+                Mediante los Tipos de Socio de Negocio se definen las reglas
+                que permiten validar los documentos RUC
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_action_partner_type"
+            action="action_partner_type"
+            parent="account.account_account_menu"
+            sequence="20"
+            groups="account.group_account_manager"/>
+
+</odoo>

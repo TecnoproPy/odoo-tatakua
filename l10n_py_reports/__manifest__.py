@@ -1,6 +1,6 @@
 {
     'name': 'Reportes Paraguay',
-    'version': '13.0.0.0.1',
+    'version': '13.0.0.0.2',
     'category': 'Localizacion',
     'sequence': 14,
     'author': 'TecnoproPy',
@@ -20,8 +20,6 @@
     'data': [
         'templates/report_invoice.xml',
         'data/report_paperformat_data.xml'
-    ],
-    'demo': [
     ],
     'installable': True,
 }

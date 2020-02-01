@@ -11,16 +11,26 @@ class Partner(models.Model):
         help='Cedula de Identidad',
         string='CI'
     )
-
     ruc = fields.Char(
         help="Registro Unico de Contribuyentes",
         string='RUC'
+    )
+    partner_type_id = fields.Many2one(
+        'partner.type',
+        string='Tipo de Socio de Negocio',
+        ondelete='restrict',
+        required=True,
     )
 
     @api.constrains('ruc')
     def check_ruc(self):
         for rec in self:
-            if not self._check_ruc(rec.ruc):
+            chk = rec.partner_type_id.ruc_required
+            if chk(rec.company_type) and not rec.ruc:
+                raise ValidationError(_('El RUC es requerido, no puede quedar '
+                                        'en blanco'))
+
+            if not rec._check_ruc(rec.ruc):
                 raise ValidationError(_("El RUC es invalido"))
 
     def _check_ruc(self, ruc):
@@ -49,8 +59,7 @@ class Partner(models.Model):
 
     @staticmethod
     def _calc_dv(ruc):
-        """
-            Función que calcula el dígito verificador en Python
+        """ Función que calcula el dígito verificador en Python
             autor: Blas Isaias Fernández Cáceres
             https://github.com/BlasFerna/py-ruc-calc
         """
@@ -85,3 +94,8 @@ class Partner(models.Model):
             return basemax - resto
         else:
             return 0
+
+    @api.onchange('partner_type_id')
+    def onchange_partner_type_id(self):
+        for rec in self:
+            rec.ruc = rec.partner_type_id.consolidated_ruc

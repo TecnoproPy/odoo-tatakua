@@ -15,7 +15,7 @@
 #
 #   Arrancar el test con:
 #
-#   oe -Q l10n_py_invoice_document -c test13e -d test13e_test
+#   oe -Q l10n_py_invoice_document -c test13 -d test13_test
 #
 
 from odoo.tests.common import TransactionCase
@@ -53,5 +53,7 @@ class DocumentTestCase(TransactionCase):
         self.assertTrue(partner._check_ruc(False))
 
     def test_calc_dv(self):
+        """ Verifica calculo del digito verificador
+        """
         partner = self.env['res.partner']
         self.assertEqual(partner._calc_dv('80028764'), 9)

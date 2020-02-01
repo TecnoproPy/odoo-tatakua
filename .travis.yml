@@ -11,7 +11,6 @@ addons:
       - python3-dev # para que instale cups
       - libcups2-dev # para que instale cups
 
-
 python:
   - "3.6"
 

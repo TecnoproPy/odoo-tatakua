@@ -80,7 +80,6 @@ class AccountJournal(models.Model):
         """ IF Configuration change try to review if this can be done and then
             create / update the document sequences
         """
-
         self.ensure_one()
         if self.company_id.country_id != self.env.ref('base.py'):
             return True

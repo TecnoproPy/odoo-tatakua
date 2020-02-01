@@ -1,6 +1,6 @@
 {
     'name': 'Tipos de documentos Paraguay',
-    'version': '13.0.0.0.1',
+    'version': '13.0.0.0.3',
     'category': 'Localizacion',
     'sequence': 14,
     'author': 'TecnoproPy',
@@ -10,6 +10,7 @@
     "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
     'depends': [
         'base',
+        'l10n_py',
         'account',
         'l10n_latam_invoice_document'
     ],
@@ -24,10 +25,13 @@
         'security/ir.model.access.csv',
         'views/account_move_view.xml',
         'data/ir_cron_data.xml',
-        'views/res_partner_view.xml'
+        'views/res_partner_view.xml',
+        'data/partner_type_data.xml',
+        'views/partner_type_view.xml',
     ],
     'demo': [
-        'demo/account_timbrado_demo.xml'
+        'demo/account_timbrado_demo.xml',
+        'demo/base_res_partner.xml'
     ],
     'installable': True,
 }
