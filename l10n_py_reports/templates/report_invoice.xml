@@ -60,7 +60,7 @@
                 height:35px;
                 }
                 .cuerpo {
-                height:500px;
+                height:270px;
                 }
                 table {
                 width:100%;
@@ -161,6 +161,9 @@
                         <th rowspan="2" style="width:7.8%">
                             <center>CANT.</center>
                         </th>
+                        <th rowspan="2" style="width:4%">
+                            <center>CODIGO<br/>BARRAS</center>
+                        </th>
                         <th rowspan="2" style="width:47.265%">
                             <center>DESCRIPCION</center>
                         </th>
@@ -183,7 +186,10 @@
                                       groups="uom.group_uom"/>
                             </td>
                             <td class="visible">
-                                <span t-field="line.name"/>
+                                <span t-field="line.product_id.barcode"/>
+                            </td>
+                            <td class="visible">
+                                <span t-field="line.product_id.display_name"/>
                             </td>
                             <td class="visible" align="right">
                                 <span t-field="line.price_unit"/>
@@ -286,17 +292,15 @@
         <!-- hacer dos facturas iguales en landscape en la hoja A4 -->
         <template id="_invoice_frame">
             <t t-call="web.internal_layout">
-                <table>
-                    <tr>
-                        <td style="width: 46.4%;">
+                <div style="width: 100;">
+                        <div>
                             <t t-call="l10n_py_reports.py_invoice"/>
-                        </td>
-                        <td style="width: 7.2%"></td>
-                        <td style="width: 46.4%;">
+                        </div>
+                        <div align="center">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+                        <div>
                             <t t-call="l10n_py_reports.py_invoice"/>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                </div>
             </t>
         </template>
 

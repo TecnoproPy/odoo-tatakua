@@ -28,8 +28,8 @@ class L10nLatamDocumentType(models.Model):
         values.update(
             {'padding': 7,
              'implementation': 'no_gap',
-             'prefix': "%03i-%03i-" % (journal.l10n_py_shipping_point,
-                                       journal.l10n_py_trade_code),
+             'prefix': "%s-%s-" % (journal.l10n_py_shipping_point,
+                                   journal.l10n_py_trade_code),
              'l10n_latam_journal_id': journal.id}
         )
 

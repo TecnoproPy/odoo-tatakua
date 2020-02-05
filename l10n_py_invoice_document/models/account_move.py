@@ -12,11 +12,11 @@ class AccountJournal(models.Model):
         help="Numero de timbrado que habilita la factura",
         string='Timbrado'
     )
-    l10n_py_trade_code = fields.Integer(
+    l10n_py_trade_code = fields.Char(
         related='journal_id.l10n_py_trade_code',
         help='Campo tecnico para relacionar con el timbrado'
     )
-    l10n_py_shipping_point = fields.Integer(
+    l10n_py_shipping_point = fields.Char(
         related='journal_id.l10n_py_shipping_point',
         help='Campo tecnico para relacionar con el timbrado'
     )
@@ -47,7 +47,8 @@ class AccountJournal(models.Model):
     document_number = fields.Char(
         help="Campo tecnico con la ultima parte del numero de factura, se usa"
              "para mandar a imprimir cuando es preimpreso",
-        compute='_compute_document_number'
+        compute='_compute_document_number',
+        string='Ultima parte del Nro de Factura'
     )
 
     def _compute_document_number(self):
@@ -74,8 +75,8 @@ class AccountJournal(models.Model):
         """
         for rec in self:
             domain = [
-                ('trade_code', '=', rec.l10n_py_shipping_point),
-                ('shipping_point', '=', rec.l10n_py_trade_code),
+                ('shipping_point', '=', rec.l10n_py_shipping_point),
+                ('trade_code', '=', rec.l10n_py_trade_code),
                 ('document_type_id.code', '=', rec.document_type_code),
                 ('state', '=', 'active')
             ]
@@ -91,6 +92,23 @@ class AccountJournal(models.Model):
         self.ensure_one()
         if self.type in ['out_invoice', 'out_refund']:
 
+            # verificar el tipo de cliente
+            partner_type = self.partner_id.partner_type_id
+            if partner_type.applied_to != 'sale':
+                raise ValidationError('El tipo de cliente "%s" no esta '
+                                      'habilitado para ventas' % self.name)
+
+            # verificar si tengo cuenta por defecto y aplicarla
+            if partner_type.default_account:
+                for line in self.invoice_line_ids:
+                    if not partner_type.default_account.reconcile:
+                        raise ValidationError(
+                            'Se quiere aplicar la cuenta %s a esta '
+                            'operacion.\nEsto no es posible porque la cuenta '
+                            'no es reconciliable.'
+                            '' % partner_type.default_account.display_name)
+                    line.account_id = partner_type.default_account
+
             # obtener las secuencias definidas en el diario
             sequence_ids = self.journal_id.l10n_py_sequence_ids
 
@@ -102,16 +120,24 @@ class AccountJournal(models.Model):
             proximo = seq.number_next
             # chequear numero a validar es mayor que el maximo
             if proximo > self.timbrado_id.end_number:
-                raise ValidationError(_('El timbrado ya no es valido, el '
-                                        'numero de documento que quiere '
-                                        'validar esta mas alla del rango.'))
+                raise ValidationError(
+                    _('El timbrado ya no es valido, el numero de documento '
+                      'que quiere validar esta mas alla del rango.\n'
+                      'El proximo numero de factura es %s mientras que el '
+                      'rango de validez del timbrado es [%s - %s]') %
+                    (proximo, self.timbrado_id.start_number,
+                     self.timbrado_id.end_number))
 
             # chequear numero a validar es menor que el minimo
             if proximo < self.timbrado_id.start_number:
-                raise ValidationError(_('El timbrado no es valido. Intenta '
-                                        'validar un numero de documento que '
-                                        'es menor al minimo valido para este '
-                                        'timbrado.'))
+                raise ValidationError(
+                    _('El timbrado no es valido. Intenta validar un numero de '
+                      'documento que es menor al minimo valido para este '
+                      'timbrado.\n'
+                      'El proximo numero de factura es %s mientras que el '
+                      'rango de validez del timbrado es [%s - %s]') %
+                    (proximo, self.timbrado_id.start_number,
+                     self.timbrado_id.end_number))
 
             # numero a validar es igual al maximo, invalidar timbrado
             if proximo == self.timbrado_id.end_number:

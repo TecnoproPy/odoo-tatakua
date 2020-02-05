@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="py_A4_landscape" model="report.paperformat">
-        <field name="name">A4 Landscape</field>
+        <field name="name">A4 Two Invoice Reports</field>
         <field name="default" eval="True"/>
         <field name="format">A4</field>
         <field name="page_height">0</field>
         <field name="page_width">0</field>
-        <field name="orientation">Landscape</field>
+        <field name="orientation">Portrait</field>
         <field name="margin_top">10</field>
-        <field name="margin_bottom">9.5</field>
+        <field name="margin_bottom">10</field>
         <field name="margin_left">16</field>
         <field name="margin_right">3</field>
         <field name="header_line" eval="False"/>

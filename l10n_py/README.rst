@@ -21,19 +21,12 @@ Contabilidad Paraguay
 - Define el Plan contable generico Paraguay.
 - Genera las cuentas contables del plan.
 - Define las cuentas por defecto para ventas y compras.
-- Define los impuestos por defecto iva ompras y ventas 5% y 10%
+- Define los impuestos por defecto iva compras y ventas 5% y 10%
 
 **Table of contents**
 
 .. contents::
    :local:
-
-Known issues / Roadmap
-======================
-
-- Traducir las cuentas al castellano
-- Revisar IVA
-- Testeo completo de la localizacion
 
 Changelog
 =========
@@ -60,7 +53,7 @@ Credits
 Authors
 ~~~~~~~
 
-* TecnoproPy
+* Tecnopro
 
 Contributors
 ~~~~~~~~~~~~
@@ -70,7 +63,7 @@ Contributors
 Other credits
 ~~~~~~~~~~~~~
 
-TecnopropPy
+Tecnopro
 
 Maintainers
 ~~~~~~~~~~~

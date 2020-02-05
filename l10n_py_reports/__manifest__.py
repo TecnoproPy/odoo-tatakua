@@ -1,10 +1,10 @@
 {
     'name': 'Reportes Paraguay',
-    'version': '13.0.0.0.1',
+    'version': '13.0.0.0.3',
     'category': 'Localizacion',
     'sequence': 14,
-    'author': 'TecnoproPy',
-    'website': 'TecnoproPy.com',
+    'author': 'Tecnopro',
+    'website': 'tecnopro.com.py',
     'license': 'Other OSI approved licence',
     'summary': 'Reportes, Facturas, Notas de credito, etc',
     "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
@@ -20,8 +20,6 @@
     'data': [
         'templates/report_invoice.xml',
         'data/report_paperformat_data.xml'
-    ],
-    'demo': [
     ],
     'installable': True,
 }

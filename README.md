@@ -6,16 +6,16 @@ Localizacion de Odoo - Paraguay v13
 
 ## El repositorio tiene los siguientes branch que trabajan de la siguiente manera;
 
-- **master** Contiene los ultimos fuentes y la documentacion.
-- **13.0** Contiene los modulos obtenidos del Sistema de Integracion Continua con el proceso de testing de Quality Assurance (CI/QA).
-- **13.0-nightly** Contiene los modulos compilados por el Sistema de Integracion Continua (CI).
-- **13.0-dev** Es la rama de desarrollo principal.
-- **13.0-#** Donde "#" es el numero de issue en desarrollo. Una vez finalizado el desarrollo/arreglo del issue, se realiza el merge (union) con la rama 13.0-dev.
+- **13.0** Version estable de produccion.
+- **master** desarrollos inestables para la siguiente version de odoo.
+- **13.0.nombre-branch#nro-issue** branch donde se esta desarrollando / corrigiendo un issue
 
 ## Sobre los modulos
 
-- **l10n_py** : Account Chart
-- **l10n_py_invoice_document** : Definicion de tipos de documento
+- **l10n_py** : Plantillado de las cuentas contables impuestos etc de la localizacion
+- **l10n_py_invoice_document** : Definicion de tipos de documento facturas, notas de credito, etc
+- **l10n_py_reports** : Documentos a imprimir como ser facturas, Definicion de tipos de documento
+- **l10n_py_vat_book** : Libros de IVA
 
 ## Futuros modulos
 - **l10n_py_pos** : Punto de Venta

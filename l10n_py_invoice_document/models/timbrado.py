@@ -1,6 +1,7 @@
 # For copyright and license notices, see __manifest__.py file in module root
 
-from odoo import fields, models, api
+from odoo.exceptions import ValidationError
+from odoo import fields, models, api, _
 
 
 class TimbradoData(models.Model):
@@ -22,15 +23,15 @@ class TimbradoData(models.Model):
         string='Fin Vigencia',
         required=True
     )
-    trade_code = fields.Integer(
+    trade_code = fields.Char(
         required=True,
         string='Codigo del establecimiento',
-        default=1
+        default='001'
     )
-    shipping_point = fields.Integer(
+    shipping_point = fields.Char(
         required=True,
         string='Punto de expedicion',
-        default=1
+        default='001'
     )
     document_type_id = fields.Many2one(
         'l10n_latam.document.type',
@@ -73,6 +74,35 @@ class TimbradoData(models.Model):
         default='draft',
         string="Estado"
     )
+
+    @staticmethod
+    def _format(value):
+        try:
+            intvalue = int(value)
+        except ValueError:
+            raise ValidationError('Esperabamos un numero')
+        return '{0:03}'.format(intvalue)
+
+    @api.onchange('shipping_point')
+    def onchange_point(self):
+        self.ensure_one()
+        self.shipping_point = self._format(self.shipping_point)
+
+    @api.onchange('trade_code')
+    def onchange_code(self):
+        self.ensure_one()
+        self.trade_code = self._format(self.trade_code)
+
+    @api.constrains('name')
+    def check_name(self):
+        for rec in self:
+            try:
+                int(rec.name)
+            except ValueError:
+                raise ValidationError('Se esperaba un numero')
+
+            if len(rec.name) != 8:
+                raise ValidationError(_('El Timbrado debe tener 8 digitos'))
 
     @api.depends('start_number', 'end_number')
     def _compute_range(self):

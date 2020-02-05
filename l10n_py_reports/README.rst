@@ -16,6 +16,10 @@ Reportes Paraguay
 
 |badge1| |badge2| 
 
+Reportes de la localizacion
+
+- Facturas, notas de credito, etc.
+- Libros de iva
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -43,7 +47,7 @@ Credits
 Authors
 ~~~~~~~
 
-* TecnoproPy
+* Tecnopro
 
 Contributors
 ~~~~~~~~~~~~
@@ -53,7 +57,7 @@ Contributors
 Other credits
 ~~~~~~~~~~~~~
 
-TecnopropPy
+Tecnopro
 
 Maintainers
 ~~~~~~~~~~~

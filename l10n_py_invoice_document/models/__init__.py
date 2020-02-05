@@ -5,3 +5,4 @@ from . import account_journal
 from . import timbrado
 from . import account_move
 from . import res_partner
+from . import partner_type

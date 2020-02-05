@@ -1,15 +1,16 @@
 {
-    'name': 'Tipos de documentos Paraguay',
-    'version': '13.0.0.0.1',
+    'name': 'Tipos de documentos (facturacion) Paraguay',
+    'version': '13.0.0.0.4',
     'category': 'Localizacion',
     'sequence': 14,
-    'author': 'TecnoproPy',
-    'website': 'TecnoproPy.com',
+    'author': 'Tecnopro',
+    'website': 'tecnopro.com.py',
     'license': 'Other OSI approved licence',
     'summary': 'Definicion de tipos de documento',
     "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
     'depends': [
         'base',
+        'l10n_py',
         'account',
         'l10n_latam_invoice_document'
     ],
@@ -24,10 +25,9 @@
         'security/ir.model.access.csv',
         'views/account_move_view.xml',
         'data/ir_cron_data.xml',
-        'views/res_partner_view.xml'
-    ],
-    'demo': [
-        'demo/account_timbrado_demo.xml'
+        'views/res_partner_view.xml',
+        'data/partner_type_data.xml',
+        'views/partner_type_view.xml',
     ],
     'installable': True,
 }

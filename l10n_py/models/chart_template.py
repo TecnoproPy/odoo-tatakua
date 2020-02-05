@@ -22,3 +22,7 @@ class AccountChartTemplate(models.Model):
                 if vals_journal['type'] in ['sale', 'purchase']:
                     vals_journal['l10n_latam_use_documents'] = False
         return journal_data
+
+    @api.model
+    def force_py_country(self):
+        self.env.user.company_id.country_id = self.env.ref('base.py')

@@ -2,12 +2,12 @@
 
 {
     'name': 'Contabilidad Paraguay',
-    'version': '13.0.0.0.1',
-    'author': 'TecnoproPy',
+    'version': '13.0.0.0.3',
+    'author': 'Tecnopro',
     'category': 'Localizacion',
     "development_status": "Beta",  # "Alpha|Beta|Production/Stable|Mature"
     'license': 'Other OSI approved licence',
-    'website': 'TecnoproPy.com',
+    'website': 'tecnopro.com.py',
     'summary': 'Modulo base para la localizacion Paraguaya',
     'depends': [
         'account',
@@ -21,10 +21,7 @@
         'data/account_chart_template_data.xml',
     ],
     'demo': [
-        'demo/account_bank_statement_demo.xml',
-        'demo/account_invoice_demo.xml',
-        'demo/account_reconcile_model.xml',
-        'data/account_chart_template_data.xml',
+
     ],
     'uninstall_hook': 'uninstall_hook',
     'installable': True,
