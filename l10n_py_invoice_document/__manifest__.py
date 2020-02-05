@@ -29,5 +29,9 @@
         'data/partner_type_data.xml',
         'views/partner_type_view.xml',
     ],
+    'demo': [
+        'demo/account_timbrado_demo.xml',
+        'demo/base_res_partner.xml'
+    ],
     'installable': True,
 }

@@ -10,9 +10,12 @@
     'website': 'tecnopro.com.py',
     'summary': 'Evita la duplicacion de RUC en la localizacion Paraguay',
     'depends': [
-        'base'
+        'base',
+        'l10n_py_invoice_document'
     ],
     'data': [
+    ],
+    'demo': [
     ],
     'installable': True,
 }

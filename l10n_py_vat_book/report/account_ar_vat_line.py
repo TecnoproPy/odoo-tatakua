@@ -116,7 +116,8 @@ class AccountArVatLine(models.Model):
     )
 
     document_type = fields.Char(
-        related='document_type_id.display_name'
+        related='document_type_id.display_name',
+        string='Tipo de documento'
     )
 
     def open_journal_entry(self):
