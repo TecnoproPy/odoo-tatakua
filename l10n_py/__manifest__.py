@@ -12,6 +12,7 @@
     'depends': [
         'account',
         'l10n_latam_invoice_document'
+        'l10n_generic_coa',
     ],
     'data': [
         'data/l10n_py.xml',
@@ -19,7 +20,6 @@
         'data/account_tax_group.xml',
         'data/l10n_py_post.xml',
         'data/account_chart_template_data.xml',
-        'l10n_generic_coa',
     ],
     'demo': [
 
