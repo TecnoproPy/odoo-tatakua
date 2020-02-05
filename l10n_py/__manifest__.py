@@ -11,7 +11,7 @@
     'summary': 'Modulo base para la localizacion Paraguaya',
     'depends': [
         'account',
-        'l10n_latam_invoice_document'
+        'l10n_latam_invoice_document',
         'l10n_generic_coa',
     ],
     'data': [
