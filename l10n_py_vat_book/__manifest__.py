@@ -21,8 +21,8 @@
         'data/account_financial_report_data.xml'
     ],
     'demo': [
-#        'demo/product_data_demo.xml',
-#        'demo/invoice_data_demo.xml'
+        'demo/product_data_demo.xml',
+        'demo/invoice_data_demo.xml'
     ],
     'installable': True,
 }
