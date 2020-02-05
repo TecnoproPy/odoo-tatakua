@@ -19,6 +19,7 @@
         'data/account_tax_group.xml',
         'data/l10n_py_post.xml',
         'data/account_chart_template_data.xml',
+        'l10n_generic_coa',
     ],
     'demo': [
 
