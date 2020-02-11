@@ -7,6 +7,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc">44444401-7</field>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_2" model="partner.type">
             <field name="applied_to">sale</field>
@@ -14,6 +15,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc">88888801-5</field>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_3" model="partner.type">
             <field name="applied_to">sale</field>
@@ -21,6 +23,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc">66666601-6</field>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_4" model="partner.type">
             <field name="applied_to">sale</field>
@@ -28,6 +31,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="False"/>
             <field name="consolidated_ruc">77777701-0</field>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_5" model="partner.type">
             <field name="applied_to">sale</field>
@@ -35,6 +39,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc" eval="False"/>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_6" model="partner.type">
             <field name="applied_to">purchase</field>
@@ -42,6 +47,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc" eval="False"/>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_7" model="partner.type">
             <field name="applied_to">purchase</field>
@@ -49,6 +55,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc" eval="False"/>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
         <record id="partner_type_data_8" model="partner.type">
             <field name="applied_to">purchase</field>
@@ -56,6 +63,7 @@
             <field name="ruc_required_person" eval="False"/>
             <field name="ruc_required_company" eval="True"/>
             <field name="consolidated_ruc">99999901-0</field>
+            <field name="default_account" ref="l10n_py.payable"/>
         </record>
     </data>
 </odoo>

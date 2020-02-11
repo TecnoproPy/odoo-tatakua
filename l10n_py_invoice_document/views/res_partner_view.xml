@@ -7,15 +7,25 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
+
             <xpath expr="//field[@name='vat']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+
             <xpath expr="//field[@name='vat']" position="after">
                 <field name="ruc"/>
                 <field name="ci"/>
-                <field name="partner_type_id"
+            </xpath>
+
+            <xpath expr="//field[@name='property_payment_term_id']" position="after">
+                <field name="partner_type_sale_id"
                        options="{'no_open': False,'no_create':True}"
-                       required="True"
+                />
+            </xpath>
+
+            <xpath expr="//field[@name='property_supplier_payment_term_id']" position="after">
+                <field name="partner_type_purchase_id"
+                       options="{'no_open': False,'no_create':True}"
                 />
             </xpath>
         </field>

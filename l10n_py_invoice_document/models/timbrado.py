@@ -9,28 +9,27 @@ class TimbradoData(models.Model):
     _description = 'Timbrado que habilita las factura'
 
     name = fields.Char(
-        string='Numero Timbrado',
+        string='Número de Timbrado',
         required=True
     )
-
     validity_start = fields.Date(
         help='Fecha a partir de la cual esta vigente el timbrado',
         string='Inicio Vigencia',
         required=True
     )
     validity_end = fields.Date(
-        help='Fecha hasta la cual es valido el timbrado',
+        help='Fecha hasta la cual es válido el timbrado',
         string='Fin Vigencia',
         required=True
     )
     trade_code = fields.Char(
         required=True,
-        string='Codigo del establecimiento',
+        string='Código del establecimiento',
         default='001'
     )
     shipping_point = fields.Char(
         required=True,
-        string='Punto de expedicion',
+        string='Punto de expedición',
         default='001'
     )
     document_type_id = fields.Many2one(
@@ -42,7 +41,7 @@ class TimbradoData(models.Model):
     )
     code = fields.Char(
         related='document_type_id.code',
-        help='Campo tecnico para seleccionar el timbrado'
+        help='Campo técnico para seleccionar el timbrado'
     )
     qty = fields.Integer(
         help='Cantidad de comprobantes autorizados en este timbrado',

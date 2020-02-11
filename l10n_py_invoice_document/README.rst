@@ -7,9 +7,9 @@ Tipos de documentos (facturacion) Paraguay
    !! changes will be overwritten.                   !!
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Alpha
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/github-TecnoproPy%2Fodoo--paraguay-lightgray.png?logo=github
     :target: https://github.com/TecnoproPy/odoo-paraguay/tree/13.0/l10n_py_invoice_document
     :alt: TecnoproPy/odoo-paraguay
@@ -43,11 +43,6 @@ Las cuentas se usan en dos lugares, cuando se hace una factura y cuando se
 hace un pago.
 
 
-
-.. IMPORTANT::
-   This is an alpha version, the data model and design can change at any time without warning.
-   Only for development or testing purpose, do not use in production.
-   `More details on development status <https://odoo-community.org/page/development-status>`_
 
 **Table of contents**
 

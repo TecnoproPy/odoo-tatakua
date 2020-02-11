@@ -8,9 +8,12 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move"
 
     def action_post(self):
-        for line in self.line_ids:
-            if not line.exclude_from_invoice_tab:
-                if not line.tax_ids:
-                    raise UserError(_('Todas las lineas de factura deben '
-                                      'tener al menos un impuesto de IVA'))
+        """ Verificar las lineas de iva pero solo en facturas de cliente
+        """
+        if self.type in ['out_invoice', 'out_refund']:
+            for line in self.line_ids:
+                if not line.exclude_from_invoice_tab:
+                    if not line.tax_ids:
+                        raise UserError(_('Todas las lineas de factura deben '
+                                          'tener al menos un impuesto de IVA'))
         super().action_post()

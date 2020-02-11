@@ -7,7 +7,7 @@
     'website': 'tecnopro.com.py',
     'license': 'Other OSI approved licence',
     'summary': 'Libros de IVA',
-    "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
+    "development_status": "Beta",  # "Alpha|Beta|Production/Stable|Mature"
     'depends': [
         'l10n_py',
         'l10n_py_reports',

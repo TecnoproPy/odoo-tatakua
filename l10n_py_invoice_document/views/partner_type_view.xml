@@ -10,13 +10,11 @@
                     <group>
                         <field name="name"/>
                         <field name="consolidated_ruc"/>
-                        <field name="applied_to"/>
+                        <field name="applied_to" widget="radio"/>
                     </group>
                     <group>
-                        <field name="ruc_required_person"
-                               widget="boolean_toggle"/>
-                        <field name="ruc_required_company"
-                               widget="boolean_toggle"/>
+                        <field name="ruc_required_person" widget="boolean_toggle"/>
+                        <field name="ruc_required_company" widget="boolean_toggle"/>
                         <field name="default_account"/>
                     </group>
                 </group>

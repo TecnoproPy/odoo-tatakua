@@ -92,22 +92,23 @@ class AccountJournal(models.Model):
         self.ensure_one()
         if self.type in ['out_invoice', 'out_refund']:
 
-            # verificar el tipo de cliente
-            partner_type = self.partner_id.partner_type_id
-            if partner_type.applied_to != 'sale':
-                raise ValidationError('El tipo de cliente "%s" no esta '
-                                      'habilitado para ventas' % self.name)
+            # verificar si tiene definido el tipo de partner
+            if not self.partner_id.partner_type_sale_id:
+                raise ValidationError(_('Debe definir el tipo de Cliente '
+                                        'en el Formulario de Cliente'))
 
-            # verificar si tengo cuenta por defecto y aplicarla
-            if partner_type.default_account:
-                for line in self.invoice_line_ids:
-                    if not partner_type.default_account.reconcile:
-                        raise ValidationError(
-                            'Se quiere aplicar la cuenta %s a esta '
-                            'operacion.\nEsto no es posible porque la cuenta '
-                            'no es reconciliable.'
-                            '' % partner_type.default_account.display_name)
-                    line.account_id = partner_type.default_account
+            # verificar que el tipo de cliente se para ventas
+            partner_type = self.partner_id.partner_type_sale_id
+            if partner_type.applied_to != 'sale':
+                raise ValidationError(_('El tipo de cliente "%s" no esta '
+                                        'habilitado para '
+                                        'ventas' % partner_type.name))
+
+            # verificar si el ruc del cliente es requerido
+            chk = self.partner_id.partner_type_sale_id.ruc_required
+            if chk(self.partner_id.company_type) and not self.partner_id.ruc:
+                raise ValidationError(_('El RUC es requerido, en este caso no '
+                                        'puede quedar en blanco'))
 
             # obtener las secuencias definidas en el diario
             sequence_ids = self.journal_id.l10n_py_sequence_ids
@@ -146,5 +147,32 @@ class AccountJournal(models.Model):
             # poner el numero de documento
             self.l10n_latam_document_number = seq.next_by_id()
 
-        # llamar al metodo original
-        super().action_post()
+            # llamar al metodo original
+            super().action_post()
+
+            # Chequear que la fecha de la factura este dentro de la validez
+            # del timbrado. Hay que chequear despues del post porque antes puede
+            # no existir la fecha de la factura.
+            start = self.timbrado_id.validity_start
+            end = self.timbrado_id.validity_end
+            if not (start <= self.invoice_date <= end):
+                raise ValidationError(
+                    _('La fecha de la factura no esta dentro del rango de '
+                      'validez del timbrado.'))
+
+        if self.type in ['in_invoice', 'in_refund']:
+            # chequear la longitud y tipo de timbrado
+
+            if len(self.l10n_py_timbrado) != 8:
+                raise ValidationError(_('La longitud del timbrado debe ser de '
+                                        'ocho digitos'))
+            try:
+                int(self.l10n_py_timbrado)
+            except ValueError:
+                raise ValidationError(_('El timbrado debe ser numerico'))
+
+            if self.invoice_date > self.l10n_py_validity_end:
+                raise ValidationError(_('La fecha de la factura es posterior '
+                                        'a la validez del timbrado'))
+            # llamar al metodo original
+            super().action_post()

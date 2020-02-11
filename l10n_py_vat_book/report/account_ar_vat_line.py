@@ -119,6 +119,9 @@ class AccountArVatLine(models.Model):
         related='document_type_id.display_name',
         string='Tipo de documento'
     )
+    payment_term = fields.Char(
+        string='Contado/Credito',
+    )
 
     def open_journal_entry(self):
         self.ensure_one()
@@ -152,7 +155,10 @@ SELECT
             WHEN btg.name = 'IVA Excento'
             THEN aml.balance ELSE Null END) as not_taxed,
     sum(aml.balance) as total,
-    rp.ruc as ruc,
+    CASE
+        WHEN am.type in ('out_invoice','out_refund')
+        THEN rp.sale_ruc
+        ELSE rp.purchase_ruc END as ruc,
     am.name as move_name,
     rp.name as partner_name,
     am.id as move_id,
@@ -164,7 +170,11 @@ SELECT
     am.name,
     am.l10n_latam_document_type_id as document_type_id,
     am.state,
-    am.company_id
+    am.company_id,
+    CASE
+        WHEN am.invoice_payment_term_id = 1
+        THEN 'Contado'
+        ELSE 'Crédito' END as payment_term
 FROM
     account_move_line aml
 LEFT JOIN

@@ -1,5 +1,5 @@
 # For copyright and license notices, see __manifest__.py file in module root
-from odoo import _, api, fields, models
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 from odoo.tools import config
 

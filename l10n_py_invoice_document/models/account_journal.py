@@ -124,7 +124,7 @@ class AccountJournal(models.Model):
         documents = self.env['l10n_latam.document.type'].search(domain)
         for document in documents:
             if self.l10n_py_sequence_ids.filtered(
-                lambda x: x.id == document.id):
+                    lambda x: x.id == document.id):
                 continue
 
             sequences |= self.env['ir.sequence'].create(

@@ -7,7 +7,7 @@
     'website': 'tecnopro.com.py',
     'license': 'Other OSI approved licence',
     'summary': 'Reportes, Facturas, Notas de credito, etc',
-    "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
+    "development_status": "Beta",  # "Alpha|Beta|Production/Stable|Mature"
     'depends': [
         'account',
         'l10n_py_invoice_document'

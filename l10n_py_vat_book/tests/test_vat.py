@@ -24,11 +24,13 @@ from datetime import datetime
 
 
 class DocumentTestCase(TransactionCase):
-
     def setup_invoices(self):
-        tax_00 = self.env['account.tax'].search([('type_tax_use', '=', 'sale'), ('amount','=', 0)],limit=1)
-        tax_05 = self.env['account.tax'].search([('type_tax_use', '=', 'sale'), ('amount','=', 5)],limit=1)
-        tax_10 = self.env['account.tax'].search([('type_tax_use', '=', 'sale'), ('amount','=', 10)],limit=1)
+        tax_00 = self.env['account.tax'].search(
+            [('type_tax_use', '=', 'sale'), ('amount', '=', 0)], limit=1)
+        tax_05 = self.env['account.tax'].search(
+            [('type_tax_use', '=', 'sale'), ('amount', '=', 5)], limit=1)
+        tax_10 = self.env['account.tax'].search(
+            [('type_tax_use', '=', 'sale'), ('amount', '=', 10)], limit=1)
 
         inv = self.env.ref('l10n_py_vat_book.demo_vat_invoice_1')
         inv.invoice_line_ids[0].tax_ids = tax_05
@@ -62,23 +64,8 @@ class DocumentTestCase(TransactionCase):
         self.env.user.company_id.country_id = self.env.ref('base.py')
         self.env.ref('l10n_py.py_chart_template').try_loading()
 
-        #import wdb;wdb.set_trace()
+        # import wdb;wdb.set_trace()
         self.setup_invoices()
-
-
-#        print('**************************************************************')
-#        print('Pais', self.env.user.company_id.country_id.name)
-#        print('**************************************************************')
-#        print('impuestos')
-#        aa = self.env['account.tax'].search([('type_tax_use', '=', 'sale'), ('amount','=', 5)])
-#        for a in aa:
-#            print(a.name)
-
-#        ii = self.env['account.move'].search([])
-#        for i in ii:
-#            print('-----------------', i.name, i.journal_id.name)
-#            for line in i.invoice_line_ids:
-#                print(line.product_id.name,line.tax_ids.name)
 
         vat_journal = self.env.ref('l10n_py_vat_book.demo_vat_journal')
         vat_journal.company_id.country_id = self.env.ref('base.py')

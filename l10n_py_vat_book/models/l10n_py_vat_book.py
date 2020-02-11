@@ -3,7 +3,7 @@ from odoo import _, api, models
 from odoo.tools.misc import format_date
 
 
-class L10nARVatBook(models.AbstractModel):
+class L10nPYVatBook(models.AbstractModel):
     _name = "l10n_py.vat.book"
     _inherit = "account.report"
     _description = "Libro de IVA Paraguay"
@@ -25,6 +25,7 @@ class L10nARVatBook(models.AbstractModel):
             {'name': _('IVA 10%'), 'class': 'number'},
             {'name': _('TOTAL'), 'class': 'number'},
             {'name': _('Tipo Documento')},
+            {'name': _('Contado/Credito')},
         ]
 
     @api.model
@@ -32,9 +33,9 @@ class L10nARVatBook(models.AbstractModel):
         journal_type = self.env.context.get('journal_type')
         # when printing report there is no key on context
         return {
-                'sale': _('Libro IVA Ventas'),
-                'purchase': _('Libro IVA Compras')
-               }.get(journal_type, _('Libro IVA'))
+            'sale': _('Libro IVA Ventas'),
+            'purchase': _('Libro IVA Compras')
+        }.get(journal_type, _('Libro IVA'))
 
     @api.model
     def _get_lines(self, options, line_id=None):
@@ -50,7 +51,7 @@ class L10nARVatBook(models.AbstractModel):
         else:
             sign = -1.0
 
-        totals = {}.fromkeys(['taxed', 'not_taxed','base_5','base_10',
+        totals = {}.fromkeys(['taxed', 'not_taxed', 'base_5', 'base_10',
                               'vat_5', 'vat_10', 'total'], 0)
 
         domain = [('journal_id.type', '=', journal_type),
@@ -99,6 +100,7 @@ class L10nARVatBook(models.AbstractModel):
                     {'name': self.format_value(sign * rec['vat_10'])},
                     {'name': self.format_value(sign * rec['total'])},
                     {'name': rec['document_type']},
+                    {'name': rec['payment_term']},
                 ],
             })
             line_id += 1
@@ -120,7 +122,7 @@ class L10nARVatBook(models.AbstractModel):
                 {'name': self.format_value(sign * totals['vat_10'])},
                 {'name': self.format_value(sign * totals['total'])},
                 {'name': ''},
-
+                {'name': ''},
             ],
         })
         return lines
