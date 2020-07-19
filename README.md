@@ -1,4 +1,4 @@
-# odoo-paraguay
+# odoo-paraguay branch produccion 502
 
 [![Build Status](https://travis-ci.com/jobiols/odoo-paraguay.svg?token=77F3WzCbdXWpLDSsuTxX&branch=13.0)](https://travis-ci.com/jobiols/odoo-paraguay)
 
